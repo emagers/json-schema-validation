@@ -1,0 +1,15 @@
+[{
+	"description": "Inner object defined with no additional properties",
+	"data": {
+		"inner": {
+
+		}
+	}
+}, {
+	"description": "Inner object defined with no additional properties",
+	"data": {
+		"inner": {
+
+		}
+	}
+}]
