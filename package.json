@@ -16,7 +16,10 @@
   "keywords": [
     "GitHub",
     "Actions",
-    "JavaScript"
+    "JavaScript",
+    "JSON",
+    "Schema",
+    "Validation"
   ],
   "author": "",
   "license": "MIT",
@@ -25,7 +28,9 @@
   },
   "homepage": "https://github.com/actions/javascript-action#readme",
   "dependencies": {
-    "@actions/core": "^1.2.5"
+    "@actions/core": "^1.2.5",
+    "ajv": "^6.12.3",
+    "dist": "^0.1.2"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.27.0",

@@ -1,18 +1,23 @@
+const fs = require('fs').promises;
 const core = require('@actions/core');
-const wait = require('./wait');
+const validate = require('./json-validate');
 
-
-// most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
+		const schemaFile = core.getInput('schema');
+		const testFile = core.getInput('testFile');
 
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
+		const schema = await fs.readFile(schemaFile, 'utf8');
+		const tests = await fs.readFile(testFile, 'utf8');
 
-    core.setOutput('time', new Date().toTimeString());
+		const valid = validate(core, JSON.parse(schema), JSON.parse(tests));
+
+		if (!valid) {
+			core.setFailed("Some tests failed validation");
+		}
+		else {
+			core.setOutput("Successfully validated all tests");
+		}
   } catch (error) {
     core.setFailed(error.message);
   }
