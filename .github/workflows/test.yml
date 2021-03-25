@@ -22,5 +22,5 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./
       with:
-        schema: ./test/schema.json
-        testFile: ./test/testFile.json
+        schema: ./tests/schema.json
+        testFile: ./tests/testFile.json
