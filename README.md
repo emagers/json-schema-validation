@@ -6,16 +6,17 @@ This Action was created by using the [javascript-action template](https://github
 
 # Defining tests
 
-Tests are defined in the following format, and any number of tests can be in the array:
+Tests are defined in the following format:
 
 ``` json
 [{
 	"description": "A brief description of what is trying to be expressed by the test",
-	"data": { //data can be any JSON object. This is the object that will be validated against the schema.
-
-	}
+	"data": { }
 }]
 ```
+> the root array can contain any number of test objects
+
+> data can be any JSON object. This is the object that will be validated against the schema.
 
 # Inputs
 
