@@ -16,11 +16,11 @@ const validate_object = function(logger, ajv, schema, obj) {
 	const valid = validator(obj.data);
 
 	if (!valid) {
-		logger.error(`X ${obj.description} failed with the following errors:`);
-		logger.error(validator.errors);
+		logger.error(`\u001b[38;2;255;0;0mX \u001b[38;2;255;255;255m${obj.description} failed with the following errors:`);
+		logger.error(`${validator.errors}\n`);
 	}
 	else {
-		logger.info(`✓ ${obj.description} is valid`);
+		logger.info(`\u001b[38;2;0;255;0m✓ \u001b[38;2;255;255;255m${obj.description} is valid\n`);
 	}
 
 	return valid;
