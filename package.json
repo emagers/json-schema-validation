@@ -29,8 +29,7 @@
   "homepage": "https://github.com/actions/javascript-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.5",
-    "ajv": "^8.0.1",
-    "dist": "^0.1.2"
+    "ajv": "^8.0.1"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.33.0",
