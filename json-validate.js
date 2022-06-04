@@ -2,13 +2,13 @@ const Ajv = require("ajv");
 
 const validate = function (logger, schema, tests) {
 	const ajv = new Ajv();
-	let valid = true;
+	let results = [];
 
 	for (let i = 0; i < tests.length; i++) {
-		valid = valid && validate_object(logger, ajv, schema, tests[i]);
+		results.push(validate_object(logger, ajv, schema, tests[i]));
 	}
 
-	return valid;
+	return results;
 };
 
 const validate_object = function(logger, ajv, schema, obj) {
@@ -18,12 +18,12 @@ const validate_object = function(logger, ajv, schema, obj) {
 	if (!valid) {
 		logger.error(`X ${obj.description} failed with the following errors:`);
 		logger.error(validator.errors);
+		return { status: false, name: obj.description };
 	}
 	else {
 		logger.info(`✓ ${obj.description} is valid`);
+		return { status: true, name: obj.description };
 	}
-
-	return valid;
 }
 
 module.exports = validate;

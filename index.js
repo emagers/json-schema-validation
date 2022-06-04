@@ -10,9 +10,18 @@ async function run() {
 		const schema = await fs.readFile(schemaFile, 'utf8');
 		const tests = await fs.readFile(testFile, 'utf8');
 
-		const valid = validate(core, JSON.parse(schema), JSON.parse(tests));
+		const testResults = validate(core, JSON.parse(schema), JSON.parse(tests));
+		const success = !testResults.any(x => !x.status);
 
-		if (!valid) {
+		await core.summary()
+			.addHeading(`Test Results ${success ? '✅' : '❌'}`)
+			.addTable([
+				[{data: "Test", header: true}, {data: "Result", header: true}],
+				testResults.map(x => [x.name, x.status ? '✅' : '❌'])
+			])
+			.write();
+
+		if (!success) {
 			core.setFailed("Some tests failed validation");
 		}
 		else {

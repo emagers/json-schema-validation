@@ -42,23 +42,27 @@ logger.error = jest.fn();
 test("validates single test against schema", function() {
 	const tests = [ validTest ];
 
-	expect(validate(logger, schema, tests)).toBe(true);
+	expect(validate(logger, schema, tests)[0].status).toBe(true);
 });
 
 test("validates multiple tests against schema", function() {
 	const tests = [ validTest, validTest ];
 
-	expect(validate(logger, schema, tests)).toBe(true);
+	const results = validate(logger, schema, tests).map(x => x.status);
+
+	expect(results).toMatchObject([true, true]);
 });
 
 test("validates single invalid test against schema", function() {
 	const tests = [ invalidTest ];
 
-	expect(validate(logger, schema, tests)).toBe(false);
+	expect(validate(logger, schema, tests)[0].status).toBe(false);
 });
 
 test("validates mix of valid and invalid tests against schema", function() {
 	const tests = [ invalidTest, validTest ];
 
-	expect(validate(logger, schema, tests)).toBe(false);
+	const results = validate(logger, schema, tests).map(x => x.status);
+
+	expect(results).toMatchObject([false, true]);
 });
