@@ -9417,12 +9417,13 @@ async function run() {
 		const testResults = validate(core, JSON.parse(schema), JSON.parse(tests));
 		const success = !testResults.some(x => !x.status);
 
+		let data = [[{data: "Test", header: true}, {data: "Result", header: true}]];
+
+		testResults.forEach(x => data.push([x.name, x.status ? '✅' : '❌']));
+
 		await core.summary
 			.addHeading(`Test Results ${success ? '✅' : '❌'}`)
-			.addTable([
-				[{data: "Test", header: true}, {data: "Result", header: true}],
-				testResults.map(x => [x.name, x.status ? '✅' : '❌'])
-			])
+			.addTable(data)
 			.write();
 
 		if (!success) {
