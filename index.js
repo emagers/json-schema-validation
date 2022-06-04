@@ -13,7 +13,7 @@ async function run() {
 		const testResults = validate(core, JSON.parse(schema), JSON.parse(tests));
 		const success = !testResults.some(x => !x.status);
 
-		await core.summary()
+		await core.summary
 			.addHeading(`Test Results ${success ? '✅' : '❌'}`)
 			.addTable([
 				[{data: "Test", header: true}, {data: "Result", header: true}],
