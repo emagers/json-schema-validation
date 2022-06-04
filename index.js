@@ -11,7 +11,7 @@ async function run() {
 		const tests = await fs.readFile(testFile, 'utf8');
 
 		const testResults = validate(core, JSON.parse(schema), JSON.parse(tests));
-		const success = !testResults.any(x => !x.status);
+		const success = !testResults.some(x => !x.status);
 
 		await core.summary()
 			.addHeading(`Test Results ${success ? '✅' : '❌'}`)
